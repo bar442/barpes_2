@@ -55,6 +55,7 @@ class Measurement():
             #------------------------> measurement data & metadata
             measurement_group = f.create_group("measurement_001")
             data = measurement_group.create_dataset("data", data=self.data, compression="gzip")
+            if self.metadata is None : self.metadata=MeasurementMetadata()
             for k, v in self.metadata.items():
                 measurement_group.attrs[k] = v
 
@@ -159,6 +160,8 @@ class MeasurementMetadata(MutableMapping):
             with open(metadata_file_path, "r", encoding="utf-8") as f:
                 metadata_object = json.load(f)
             return MeasurementMetadata(json_object=metadata_object,metadata_file_path=metadata_file_path)
+        else :
+            return MeasurementMetadata(json_object={},metadata_file_path=metadata_file_path)
         
     @classmethod
     def from_measurement_file(cls,measurement_file_path:str)->'MeasurementMetadata':
