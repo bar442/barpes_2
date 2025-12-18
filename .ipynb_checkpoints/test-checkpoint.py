@@ -19,14 +19,14 @@ from view import *
 
 # mes = loaders.load_data_from_MNlab_deflection_file(r'Z:\ARPES\in-house\April2025\CoNb3S6_mg337_S01_round_01\CoNb3S6_mg337_S01_0001.zip')
 
-brp_widg = BarpesGraphicsLayoutWidget()
-brp_plot = brp_widg.addBarpesPlot(1,1)
+# brp_widg = BarpesGraphicsLayoutWidget()
+# brp_plot = brp_widg.addBarpesPlot(1,1)
 
-aaa=show_widget(brp_widg,"fsdfs")
+# aaa=show_widget(brp_widg,"fsdfs")
 
 
-# sss= DataViewer1D()
-# aaa=show_aa(sss,"fsdfs")
+sss= DataViewer1D()
+aaa=show_aa(sss,"fsdfs")
 
 
 print("sdfsf")
