@@ -1,2 +1,3 @@
 from .brp_plot_item import BarpesPlotItem
+from .brp_image_plot_item import BarpesImagePlotItem
 from .brps_graphics_layout import BarpesGraphicsLayoutWidget

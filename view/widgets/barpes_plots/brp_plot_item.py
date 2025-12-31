@@ -17,8 +17,8 @@ class BarpesPlotItem(pg.PlotItem):
         #------------------------------
         self._curve_plots:Dict[str,pg.PlotCurveItem]={}
         self._scatter_plots:Dict[str,pg.ScatterPlotItem]={}
-        self._image_items:Dict[str,pg.ImageItem]={}
         self._infinity_lines:List[pg.InfiniteLine]=[]
+        # self._image_items:Dict[str,pg.ImageItem]={}
 
 
         ########### Label Group ###########
@@ -49,8 +49,9 @@ class BarpesPlotItem(pg.PlotItem):
 
 
 
-    def add_curve_plot(self,xs:np.ndarray,ys:np.ndarray,key:str=None,color="pink",line_width:int=1)->pg.PlotCurveItem:
+    def add_curve_plot(self,xs:np.ndarray,ys:np.ndarray,key:str=None,color="pink",line_width:int=1,curve_plot:pg.PlotCurveItem=None)->pg.PlotCurveItem:
         collection,result = self._curve_plots ,pg.PlotCurveItem(pen=pg.mkPen(color, width=line_width))
+        if curve_plot : result=curve_plot
         auto_key_label="curve_plot"
 
         if key is None or not isinstance(key,str) or key in collection.keys():
@@ -110,11 +111,19 @@ class BarpesPlotItem(pg.PlotItem):
         horazontal_line = pg.InfiniteLine(movable=True, angle=0, label='y={value:0.2f}',pen=pg.mkPen((250, 91, 5),width=1) , labelOpts={'position':0.1, 'color': "blue", 'fill': (200,200,200,50), 'movable': True})
         self.addItem(horazontal_line)
         self._infinity_lines.append(horazontal_line)
+        
+        view_center = self.getViewBox().viewRect().center()
+        cx,cy = view_center.x(),view_center.y()
+        horazontal_line.setValue(cy)
 
     def add_vertical_infinity_line(self):
         vertical_line = pg.InfiniteLine(movable=True, angle=90, label='y={value:0.2f}',pen=pg.mkPen((250, 91, 5),width=1) , labelOpts={'position':0.1, 'color': "blue", 'fill': (200,200,200,50), 'movable': True})
         self.addItem(vertical_line)
         self._infinity_lines.append(vertical_line)
+
+        view_center = self.getViewBox().viewRect().center()
+        cx,cy = view_center.x(),view_center.y()
+        vertical_line.setValue(cx)
 
     def remove_all_infinity_lines(self):
         for il in self._infinity_lines:
