@@ -64,7 +64,7 @@ class BarpesImagePlotItem(BarpesPlotItem):
     @property
     def y_scale(self)->np.ndarray: return self.scales[1]
 
-    def setData(self,data:np.ndarray=None,scales:List[np.ndarray]=None,scales_labels:List[str]=None):
+    def setData(self,data:np.ndarray=None,scales:List[np.ndarray]=None,scales_labels:List[str]=None, rescale_view:bool=False):
         if data is not None:self._data=data
         if scales:self._scales=scales
         if scales_labels:self._scales_labels=scales_labels
@@ -80,10 +80,11 @@ class BarpesImagePlotItem(BarpesPlotItem):
         self.image_item_transform=self.create_image_to_scale_and_position_transform()
         self.image_item.setTransform(self.image_item_transform)
         #---- set image view
-        x_scale,y_scale = self.x_scale , self.scales[1]
-        min_x,max_x,min_y,max_y= x_scale.min() , x_scale.max() , y_scale.min() , y_scale.max()
-        self.setXRange(min_x,max_x)
-        self.setYRange(min_y,max_y)
+        if rescale_view:
+            x_scale,y_scale = self.x_scale , self.scales[1]
+            min_x,max_x,min_y,max_y= x_scale.min() , x_scale.max() , y_scale.min() , y_scale.max()
+            self.setXRange(min_x,max_x)
+            self.setYRange(min_y,max_y)
         #---- set axis labels
         self.setLabel(axis='left', text=self.scales_labels[1])
         self.setLabel(axis='bottom', text=self.scales_labels[0])

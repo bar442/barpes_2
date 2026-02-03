@@ -5,7 +5,8 @@ import pyqtgraph as pg
 from PyQt5.QtWidgets import  QWidget,QDoubleSpinBox,QSpinBox,QGridLayout , QHBoxLayout,QVBoxLayout,QLabel
 from PyQt5.QtWidgets import  QColorDialog,QPushButton,QComboBox,QInputDialog,QLineEdit,QMessageBox
 from PyQt5.QtGui import QColor
-from ...model import Slicer_1D
+from PyQt5.QtWidgets import QSizePolicy
+from model import Slicer_1D
 import math
 from .labeled_inputs import *
 
@@ -14,23 +15,28 @@ class _SlicedIndexControl(QWidget):
     def __init__(self,txt:str=None):
         super().__init__()
         ########### general layout ###########
-        self.layout:QVBoxLayout= QVBoxLayout()
+        self.layout:QHBoxLayout= QHBoxLayout()
         self.setLayout(self.layout)
+        self.layout.setContentsMargins(0, 0, 0, 0)
         #---
         self.label=QLabel()
         self.layout.addWidget(self.label)
         if txt:self.label.setText(txt)
+        self.label.setSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
         #---
         self.spinbox_index=QSpinBox()
         self.layout.addWidget(self.spinbox_index)
         self.spinbox_index.setPrefix("Index = ")
+        self.spinbox_index.setSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
         #---
         self.spinbox_value=QDoubleSpinBox()
         self.layout.addWidget(self.spinbox_value)
         self.spinbox_value.setPrefix("Value = ")
+        self.spinbox_value.setSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
         #---
         self.spinbox_integration=QDoubleSpinBox()
         self.layout.addWidget(self.spinbox_integration)
+        self.spinbox_integration.setSizePolicy(QSizePolicy.Minimum,QSizePolicy.Minimum)
         self.spinbox_integration.setPrefix("Integration = ")
         self.spinbox_integration.setSingleStep(1)
         self.spinbox_integration.setRange(0,2147483647)

@@ -8,7 +8,7 @@ from view import *
 # mes_3=ARPES_Measurement.from_barpes_file(r"C:\Users\bar\Downloads\dwnld_test\test.barpes")
 
 
-# data_file_3d= r"C:\Users\bar\Downloads\dwnld_test\example_data\mg462_S02_Ta[SSe]2_round_01\mg462_Ta[SSe]2_S02_0001.txt"
+data_file_3d= r"C:\Users\bar\Downloads\dwnld_test\example_data\mg462_S02_Ta[SSe]2_round_01\mg462_Ta[SSe]2_S02_0001.txt"
 data_file_2d= r"C:\Users\bar\Downloads\dwnld_test\example_data\mg462_S02_Ta[SSe]2_round_01\mg462_Ta[SSe]2_S02_0003.txt"
 # mes = loaders.load_data_from_MNlab_txt_file(data_file_2d)
 # mes_2= mes.copy()
@@ -22,11 +22,19 @@ data_file_2d= r"C:\Users\bar\Downloads\dwnld_test\example_data\mg462_S02_Ta[SSe]
 # brp_widg = BarpesGraphicsLayoutWidget()
 # brp_plot = brp_widg.addBarpesPlot(1,1)
 
+# mes=loaders.load_data_from_MNlab_txt_file(data_file_2d)
+# image_viewer=DataViewer_Image()
+# # image_viewer=ImageRotationTool()
+# image_viewer.image_plot.setData(data=mes.data,scales=mes.scales,scales_labels=mes.scales_names)
+# aaa=show_widget(image_viewer,"fsdfs")
+
+# mes=loaders.load_data_from_MNlab_txt_file(data_file_3d)
 mes=loaders.load_data_from_MNlab_txt_file(data_file_2d)
-image_viewer=DataViewer_Image()
-# image_viewer=ImageRotationTool()
-image_viewer.image_plot.setData(data=mes.data,scales=mes.scales,scales_labels=mes.scales_names)
-aaa=show_widget(image_viewer,"fsdfs")
+viewer=SlicerViewer2D.from_measurement(mes)
+# viewer.slicer_widget.setSliceIndex(2,46)
+aaa=show_widget(viewer,"fsdfs")
+
+
 
 exit()
 # sss= DataViewer1D()
